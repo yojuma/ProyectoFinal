@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>character.png</file>
+        <file>fantasma.png</file>
+        <file>bmpSolido.png</file>
+        <file>fondo.png</file>
+        <file>fondoJuego.jpg</file>
+        <file>personaje.png</file>
+    </qresource>
+</RCC>
