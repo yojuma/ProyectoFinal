@@ -9,10 +9,6 @@ Personaje::Personaje(QObject *parent)
     width = 108.25/3;
     height = 36.0625;
     stripe = new QPixmap(":/personaje.png");
-    timer = new QTimer;
-    //timer->start(200);
-
-    connect(timer, &QTimer::timeout, this, &Personaje::actualizarPersonaje);
 }
 
 
@@ -22,12 +18,15 @@ void Personaje::actualizarPersonaje(){
 
 QRectF Personaje::boundingRect() const{
     return QRectF(0, 0, width, height);
+
 }
 
 void Personaje::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-    QPixmap scaled = stripe->scaled(QSize(108.25, 144.25));
+    QPixmap scaled = stripe->scaled(QSize(433/4, 577/4));
     painter->drawPixmap(0, 0, scaled, colPixmap, rowPixmap, width, height);
+    //painter->setBrush(Qt::transparent);
+    //painter->drawRect(boundingRect());
     Q_UNUSED(option);
     Q_UNUSED(widget);
 }
@@ -38,7 +37,7 @@ void Personaje::moveLeft(){
     if(colPixmap >= 108.25){
         colPixmap = 0;
     }
-    posX -= 10;
+    posX -= 5;
     setPos(posX, posY);
 }
 
@@ -48,7 +47,7 @@ void Personaje::moveRight(){
     if(colPixmap >= 108.25){
         colPixmap = 0;
     }
-    posX += 10;
+    posX += 5;
     setPos(posX, posY);
 }
 
@@ -58,7 +57,7 @@ void Personaje::moveUp(){
     if(colPixmap >= 108.25){
         colPixmap = 0;
     }
-    posY -= 10;
+    posY -= 5;
     setPos(posX, posY);
 }
 
@@ -68,9 +67,14 @@ void Personaje::moveDown(){
     if(colPixmap >= 108.25){
         colPixmap = 0;
     }
-    posY += 10;
+    posY += 5;
     setPos(posX, posY);
 }
 
-
+qreal Personaje::getPosX(){
+    return posX;
+}
+qreal Personaje::getPosY(){
+    return posY;
+}
 

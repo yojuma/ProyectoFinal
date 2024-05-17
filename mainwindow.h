@@ -5,8 +5,8 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include "personaje.h"
-#include "fantasma.h"
 #include "solidos.h"
+#include "bomba.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,6 +25,12 @@ public:
     void keyPressEvent(QKeyEvent*);
     void DibujarMatriz();
     void generarMatriz();
+    int bombas=1;
+    void jugar();
+    void crearNivel();
+
+private slots:
+    void on_ButtomPlay_clicked();
 
 private:
     int filas=15;
@@ -34,9 +40,11 @@ private:
 
     Ui::MainWindow *ui;
     QGraphicsScene* scene;
+    QGraphicsScene* menuPrincipal;
     Personaje* personaje;
-    Fantasma* fantasma;
     Solidos* cuadrosSolidos;
+    Bomba* bomba;
+    QTimer *timer;
 };
 #endif // MAINWINDOW_H
 

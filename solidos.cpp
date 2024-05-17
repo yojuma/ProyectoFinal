@@ -5,7 +5,7 @@ Solidos::Solidos(QObject *parent)
     rowPixmap = 0;
     colPixmap = 0;
     width = 63;
-    height = 54;
+    height = 53;
     stripe = new QPixmap(":/bmpSolido.png");
 }
 
@@ -14,7 +14,7 @@ QRectF Solidos::boundingRect() const{
 }
 
 void Solidos::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-    QPixmap scaled = stripe->scaled(QSize(63,54));
+    QPixmap scaled = stripe->scaled(QSize(63,53));
     painter->drawPixmap(0,0, scaled, colPixmap, rowPixmap, width, height);
     Q_UNUSED(option);
     Q_UNUSED(widget);

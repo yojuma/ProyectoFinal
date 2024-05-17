@@ -18,15 +18,8 @@ public:
     void moveRight();
     void moveUp();
     void moveDown();
-    QPainterPath shape() const {
-        QPainterPath path;
-        // Añade la forma del cuerpo del personaje al path
-        path.addRect(0, 0, width, height);
-        // Excluye la cabeza del path
-        QRectF cabezaRect(0, -10, width, 10); // Suponiendo que la cabeza está sobre el cuerpo
-        path.addRect(cabezaRect);
-        return path;
-    }
+    qreal getPosX();
+    qreal getPosY();
 
 public slots:
     void actualizarPersonaje();
