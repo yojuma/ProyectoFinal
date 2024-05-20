@@ -4,9 +4,12 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QKeyEvent>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 #include "personaje.h"
 #include "solidos.h"
 #include "bomba.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -45,6 +48,10 @@ private:
     Solidos* cuadrosSolidos;
     Bomba* bomba;
     QTimer *timer;
+    QMediaPlayer *player;
+    QMediaPlaylist *playlist;
+    QMediaPlayer *player1;
+    QMediaPlaylist *playlist1;
 };
 #endif // MAINWINDOW_H
 

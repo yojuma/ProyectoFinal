@@ -1,9 +1,13 @@
 <RCC>
     <qresource prefix="/">
-        <file>bmpSolido.png</file>
-        <file>fondoJuego.jpg</file>
-        <file>personaje.png</file>
-        <file>bomba.png</file>
-        <file>menu_back.png</file>
+        <file>imagenes/bmpSolido.png</file>
+        <file>imagenes/bomba.png</file>
+        <file>imagenes/destruible.png</file>
+        <file>imagenes/fondoJuego.jpg</file>
+        <file>imagenes/icono.ico</file>
+        <file>imagenes/personaje.png</file>
+        <file>imagenes/menu_back.png</file>
+        <file>audio/musica_juego.mp3</file>
+        <file>audio/musica_menu.mp3</file>
     </qresource>
 </RCC>

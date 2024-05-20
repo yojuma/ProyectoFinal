@@ -7,24 +7,39 @@
 #include <QtDebug>
 #include <QLabel>
 #include <QMessageBox>
+#include <QMediaPlayer>
 
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+
 {
+    //----------crear menu principal----------
     ui->setupUi(this);
     menuPrincipal = new QGraphicsScene(this);
     menuPrincipal->setSceneRect(0, 0, 1069, 807); // Tamaño del menú principal
     ui->graphicsView->setScene(menuPrincipal);
     ui->graphicsView->resize(menuPrincipal->width()+5, menuPrincipal->height()+5);
     this->resize(ui->graphicsView->width()+9, ui->graphicsView->height()+29);
-    auto background = QImage(":/menu_back.png");
+    auto background = QImage(":/imagenes/menu_back.png");
     auto scaledBack = background.scaled(1069,807);
     ui->graphicsView->setBackgroundBrush(scaledBack); // Ajustar tamaño y posición de la imagen
+
+    //----------musica----------
+    playlist = new QMediaPlaylist();
+    player = new QMediaPlayer(this);
+
+    playlist->addMedia(QUrl("qrc:/audio/musica_menu.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+
+    player->setPlaylist(playlist);
+    player->setVolume(10);
+    player->play();
 }
 
-void MainWindow::crearNivel(){//Crea y agrega los elementos del menu inicial
+void MainWindow::crearNivel(){
+    //--------Crea y agrega los elementos del menu inicial--------
     ui->setupUi(this);
 
     personaje = new Personaje;
@@ -35,10 +50,22 @@ void MainWindow::crearNivel(){//Crea y agrega los elementos del menu inicial
     ui->graphicsView->setScene(scene);
     ui->graphicsView->resize(scene->width()+5, scene->height()+5);
     this->resize(ui->graphicsView->width()+20, ui->graphicsView->height()+100);
-    auto background = QImage(":/fondoJuego.jpg");
+    auto background = QImage(":/imagenes/fondoJuego.jpg");
     auto scaledBack = background.scaled(1071,810);
     ui->graphicsView->setBackgroundBrush(scaledBack);
 
+    //--------musica nivel-------
+    playlist1 = new QMediaPlaylist();
+    player1 = new QMediaPlayer(this);
+    playlist1->addMedia(QUrl("qrc:/audio/musica_juego.mp3"));
+    playlist1->setPlaybackMode(QMediaPlaylist::Loop);
+
+    player1->setPlaylist(playlist1);
+    player1->setVolume(10);
+    player1->play();
+
+
+    //---------añadir personaje y bloques fijos-----------
     scene->addItem(personaje);
     personaje->setPos(70,70);
 
@@ -191,5 +218,8 @@ void MainWindow::on_ButtomPlay_clicked(){
     crearNivel();
     ui->ButtomPlay->hide();
     menuPrincipal->clear();
+    player->stop();
+    delete player;
+    delete playlist;
 }
 

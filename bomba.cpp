@@ -7,7 +7,7 @@ Bomba::Bomba(qreal x, qreal y){
     colPixmap = 0;
     width = 44;
     height = 48;
-    stripe = new QPixmap(":/bomba.png");
+    stripe = new QPixmap(":/imagenes/bomba.png");
     timer = new QTimer;
     timer->start(200);
 

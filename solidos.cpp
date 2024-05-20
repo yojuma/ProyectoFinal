@@ -6,7 +6,7 @@ Solidos::Solidos(QObject *parent)
     colPixmap = 0;
     width = 63;
     height = 53;
-    stripe = new QPixmap(":/bmpSolido.png");
+    stripe = new QPixmap(":/imagenes/bmpSolido.png");
 }
 
 QRectF Solidos::boundingRect() const{

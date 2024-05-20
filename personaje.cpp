@@ -8,7 +8,7 @@ Personaje::Personaje(QObject *parent)
     colPixmap = 0;
     width = 108.25/3;
     height = 36.0625;
-    stripe = new QPixmap(":/personaje.png");
+    stripe = new QPixmap(":/imagenes/personaje.png");
 }
 
 
