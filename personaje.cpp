@@ -2,12 +2,12 @@
 
 
 Personaje::Personaje(QObject *parent)
-    : QObject{parent}, posX{70}, posY{70}
+    : QObject{parent}, posX{70}, posY{60}
 {
     rowPixmap = 0;
     colPixmap = 0;
-    width = 108.25/3;
-    height = 36.0625;
+    width = (433/3)/3;
+    height = (577/3)/4;
     stripe = new QPixmap(":/imagenes/personaje.png");
 }
 
@@ -23,7 +23,7 @@ QRectF Personaje::boundingRect() const{
 
 void Personaje::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-    QPixmap scaled = stripe->scaled(QSize(433/4, 577/4));
+    QPixmap scaled = stripe->scaled(QSize(433/3, 577/3));
     painter->drawPixmap(0, 0, scaled, colPixmap, rowPixmap, width, height);
     //painter->setBrush(Qt::transparent);
     //painter->drawRect(boundingRect());
@@ -32,9 +32,9 @@ void Personaje::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
 }
 
 void Personaje::moveLeft(){
-    rowPixmap = 36.0625;
+    rowPixmap = (577/3)/4;
     colPixmap += width;
-    if(colPixmap >= 108.25){
+    if(colPixmap >= 433/3){
         colPixmap = 0;
     }
     posX -= 5;
@@ -42,9 +42,9 @@ void Personaje::moveLeft(){
 }
 
 void Personaje::moveRight(){
-    rowPixmap = 72.125;
+    rowPixmap = (577/3)/2;
     colPixmap += width;
-    if(colPixmap >= 108.25){
+    if(colPixmap >= 433/3){
         colPixmap = 0;
     }
     posX += 5;
@@ -52,9 +52,9 @@ void Personaje::moveRight(){
 }
 
 void Personaje::moveUp(){
-    rowPixmap = 108.1875;
+    rowPixmap = 144.2475;
     colPixmap += width;
-    if(colPixmap >= 108.25){
+    if(colPixmap >= 433/3){
         colPixmap = 0;
     }
     posY -= 5;
@@ -64,7 +64,7 @@ void Personaje::moveUp(){
 void Personaje::moveDown(){
     rowPixmap = 0;
     colPixmap += width;
-    if(colPixmap >= 108.25){
+    if(colPixmap >= 433/3){
         colPixmap = 0;
     }
     posY += 5;

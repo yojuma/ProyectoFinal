@@ -7,6 +7,8 @@
         <file>imagenes/icono.ico</file>
         <file>imagenes/personaje.png</file>
         <file>imagenes/menu_back.png</file>
+        <file>imagenes/Boton_nueva.png</file>
+        <file>imagenes/enemigo.png</file>
         <file>audio/musica_juego.mp3</file>
         <file>audio/musica_menu.mp3</file>
     </qresource>

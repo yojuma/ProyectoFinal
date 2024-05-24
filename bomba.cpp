@@ -30,8 +30,8 @@ QRectF Bomba::boundingRect() const{
 void Bomba::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget){
     QPixmap scaled = stripe->scaled(QSize(132, 48));
     painter->drawPixmap(0, 0, scaled, colPixmap, rowPixmap, width, height);
-    //painter->setBrush(Qt::transparent);
-    //painter->drawRect(boundingRect());
+    painter->setBrush(Qt::transparent);
+    painter->drawRect(boundingRect());
     Q_UNUSED(option);
     Q_UNUSED(widget);
 }
