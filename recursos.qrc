@@ -11,5 +11,6 @@
         <file>imagenes/enemigo.png</file>
         <file>audio/musica_juego.mp3</file>
         <file>audio/musica_menu.mp3</file>
+        <file>imagenes/explosion.png</file>
     </qresource>
 </RCC>

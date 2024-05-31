@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
+    <width>1296</width>
     <height>976</height>
    </rect>
   </property>
@@ -49,23 +49,140 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="lcdNumber">
+   <widget class="QLCDNumber" name="contadorJuego">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>850</y>
+      <x>1130</x>
+      <y>40</y>
       <width>121</width>
       <height>51</height>
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>1140</x>
+      <y>20</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tiempo restante:</string>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView_2">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>10</y>
+      <width>201</width>
+      <height>291</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>110</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>puntuacion:</string>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="puntuacion">
+    <property name="geometry">
+     <rect>
+      <x>1180</x>
+      <y>130</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>140</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Jugador:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>200</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Enemigo 1:</string>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="puntuacion_enemigo1">
+    <property name="geometry">
+     <rect>
+      <x>1180</x>
+      <y>190</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>260</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Enemigo 2:</string>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="puntuacion_enemigo2">
+    <property name="geometry">
+     <rect>
+      <x>1180</x>
+      <y>250</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>graphicsView_2</zorder>
+   <zorder>graphicsView</zorder>
+   <zorder>ButtomPlay</zorder>
+   <zorder>contadorJuego</zorder>
+   <zorder>label</zorder>
+   <zorder>label_2</zorder>
+   <zorder>puntuacion</zorder>
+   <zorder>label_3</zorder>
+   <zorder>label_4</zorder>
+   <zorder>puntuacion_enemigo1</zorder>
+   <zorder>label_5</zorder>
+   <zorder>puntuacion_enemigo2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1280</width>
+     <width>1296</width>
      <height>25</height>
     </rect>
    </property>

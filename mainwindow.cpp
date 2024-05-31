@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QMessageBox>
 #include <QMediaPlayer>
+#include <QMediaPlaylist>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -31,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     playlist->addMedia(QUrl("qrc:/audio/musica_menu.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
     player->setPlaylist(playlist);
-    player->setVolume(15);
+    player->setVolume(0);
     player->play();
 }
 
@@ -43,25 +44,27 @@ void MainWindow::crearNivel(){
     scene->setSceneRect(0, 0, 1069, 807);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->resize(scene->width()+5, scene->height()+5);
-    this->resize(ui->graphicsView->width()+100, ui->graphicsView->height()+120);
+    this->resize(ui->graphicsView->width()+220, ui->graphicsView->height()+50);
     auto background = QImage(":/imagenes/fondoJuego.jpg");
     auto scaledBack = background.scaled(1071,810);
     ui->graphicsView->setBackgroundBrush(scaledBack);
 
     //--------musica nivel-------
+    /*
     playlist1 = new QMediaPlaylist();
     player1 = new QMediaPlayer(this);
+    playlist1->addMedia(QUrl("qrc:/audio/musica_juego.mp3"));
     playlist1->addMedia(QUrl("qrc:/audio/musica_juego.mp3"));
     playlist1->setPlaybackMode(QMediaPlaylist::Loop);
     player1->setPlaylist(playlist1);
     player1->setVolume(0);
-    player1->play();
+    player1->play();*/
 
     //---------añadir personaje y enemigos-----------
     personaje = new Personaje;
     scene->addItem(personaje);
     personaje->setPos(70,60);
-    //-----------------------------------
+
     switch(enemigos){
     case 0:
         enemigo1 = new Enemigo;
@@ -80,7 +83,7 @@ void MainWindow::crearNivel(){
     }
     //----------------------------
     timerEnemigo = new QTimer;
-    timerEnemigo->start(20);
+    timerEnemigo->start(200);
     connect(timerEnemigo, &QTimer::timeout, this, &MainWindow::checkCollisionEnemigo);
 
     //-------añadir bloques solidos---------
@@ -309,7 +312,21 @@ void MainWindow::crearNivel(){
 
 
 MainWindow::~MainWindow(){
+    for (Bomba* bomba : nBombas) {
+            delete bomba;
+        }
+        nBombas.clear();
+    for (Solidos* solidos : bSolidos) {
+            delete solidos;
+        }
+        bSolidos.clear();
+    for (Destruibles* destruibles : bDestruibles) {
+            delete destruibles;
+        }
+        bDestruibles.clear();
     delete personaje;
+    delete enemigo1;
+    delete enemigo2;
     delete scene;
     delete ui;
 }
@@ -343,10 +360,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
                 qreal x = personaje->getPosX();
                 qreal y = personaje->getPosY();
                 if(bombas==1){
-                    auto exp = new Bomba(x, y);
-                    scene->addItem(exp);
-                    exp->setPos(x,y);
+                    bomba = new Bomba(x, y);
+                    nBombas.push_back(bomba);
+                    scene->addItem(bomba);
                     bombas++;
+                    bomba->setPos(x,y);
+                    bombas--;
+
                 }
             }
         }
@@ -379,6 +399,9 @@ void MainWindow::on_ButtomPlay_clicked(){
     player->stop();
     delete player;
     delete playlist;
+    ui->contadorJuego->display(tiempo);
+    connect(cronometro, &QTimer::timeout, this, &MainWindow::activarTimer);
+    cronometro->start(1000);
 }
 
 void MainWindow::checkCollisionEnemigo(){
@@ -401,15 +424,79 @@ void MainWindow::checkCollisionEnemigo(){
                     enemigo2->colision(false);
 
                 }
-                if(choque==enemigo3){
-                    enemigo3->colision(true);
-                }
-                else{
-                    enemigo3->colision(false);
-
-                }
             }
         }
+    }
+}
+
+void MainWindow::activarTimer(){
+    tiempo--;
+    if(tiempo==499){
+        tiempo=459;
+    }
+    else if(tiempo==399){
+        tiempo=359;
+    }
+    else if(tiempo==299){
+        tiempo=259;
+    }
+    else if(tiempo==199){
+        tiempo=159;
+    }
+    else if(tiempo==99){
+        tiempo=59;
+    }
+    ui->contadorJuego->display(tiempo);
+    if(tiempo==0){
+        if(puntos_jugador>puntos_enemigo1 && puntos_jugador>puntos_enemigo2){
+            QMessageBox msgBox;
+            msgBox.setText("Tiempo terminado.\n"
+                           "El ganador es el jugador.");
+            msgBox.exec();
+            cronometro->stop();
+            delete personaje;
+            delete enemigo1;
+            delete enemigo2;
+            delete scene;
+            delete ui;
+        }
+        else if(puntos_enemigo1>puntos_jugador && puntos_enemigo1>puntos_enemigo2){
+            QMessageBox msgBox;
+            msgBox.setText("Tiempo terminado.\n"
+                           "El ganador es el enemigo 1.");
+            msgBox.exec();
+            cronometro->stop();
+            delete personaje;
+            delete enemigo1;
+            delete enemigo2;
+            delete scene;
+            delete ui;
+        }
+        else if(puntos_enemigo2>puntos_jugador && puntos_enemigo2>puntos_enemigo1){
+            QMessageBox msgBox;
+            msgBox.setText("Tiempo terminado.\n"
+                           "El ganador es el enemigo 2.");
+            msgBox.exec();
+            cronometro->stop();
+            delete personaje;
+            delete enemigo1;
+            delete enemigo2;
+            delete scene;
+            delete ui;
+        }
+        else{
+            QMessageBox msgBox;
+            msgBox.setText("Tiempo terminado.\n"
+                           "No hay ganador.");
+            msgBox.exec();
+            cronometro->stop();
+            delete personaje;
+            delete enemigo1;
+            delete enemigo2;
+            delete scene;
+            delete ui;
+        }
+
     }
 }
 

@@ -1,6 +1,10 @@
 #include "bomba.h"
+#include "explosion.h"
+#include <mainwindow.h>
+#include <QGraphicsScene>
 
-Bomba::Bomba(qreal x, qreal y){
+Bomba::Bomba(qreal x, qreal y, QGraphicsItem *parent){
+    Q_UNUSED(parent);
     posX = x;
     posY = y;
     rowPixmap = 0;
@@ -10,8 +14,9 @@ Bomba::Bomba(qreal x, qreal y){
     stripe = new QPixmap(":/imagenes/bomba.png");
     timer = new QTimer;
     timer->start(200);
-
     connect(timer, &QTimer::timeout, this, &Bomba::actualizar);
+    QTimer::singleShot(2000, this, &Bomba::detonate);
+
 }
 
 void Bomba::actualizar(){
@@ -19,7 +24,6 @@ void Bomba::actualizar(){
     if(colPixmap >= 132){
         colPixmap = 0;
     }
-
     update(0, 0, width, height);
 }
 
@@ -45,6 +49,36 @@ void Bomba::setInitialPosition(qreal a, qreal b){
 qreal Bomba::getPosX(){
     return posX;
 }
+
 qreal Bomba::getPosY(){
     return posY;
+}
+
+void Bomba::detonate() {
+    createExplosion(x(), y()); // Centro
+    createExplosion(x() - 50, y()); // Izquierda
+    createExplosion(x() + 63, y()); // Derecha
+    createExplosion(x(), y() - 50); // Arriba
+    createExplosion(x(), y() + 50); // Abajo
+    scene()->removeItem(this);
+    delete this;
+}
+
+void Bomba::createExplosion(qreal x, qreal y){
+    QList<QGraphicsItem *> items = scene()->items(QRectF(x, y, 50, 50));
+    for (QGraphicsItem *item : items){
+        if (dynamic_cast<Solidos*>(item) != nullptr){
+            return;
+        }
+        if (Destruibles *destruible = dynamic_cast<Destruibles*>(item)){
+            scene()->removeItem(destruible);
+            this->deleteLater();
+        }
+        if (Enemigo *enemigo = dynamic_cast<Enemigo*>(item)){
+            scene()->removeItem(enemigo);
+            this->deleteLater();
+        }
+    }
+    auto explosion = new Explosion(x, y);
+    scene()->addItem(explosion);
 }

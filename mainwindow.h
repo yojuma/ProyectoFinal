@@ -11,6 +11,7 @@
 #include "bomba.h"
 #include "destruibles.h"
 #include "enemigo.h"
+#include "explosion.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -31,8 +32,13 @@ public:
     void checkCollisionEnemigo();
     int bombas=1;
     int enemigos=0;
+    int tiempo=500;
+    int puntos_jugador=0;
+    int puntos_enemigo1=0;
+    int puntos_enemigo2=0;
     void jugar();
     void crearNivel();
+    void activarTimer();
 
 
 private slots:
@@ -42,20 +48,20 @@ private:
     int filas=15;
     int columnas=17;
 
-
-
     Ui::MainWindow *ui;
     QGraphicsScene* scene;
     QGraphicsScene* menuPrincipal;
     Personaje* personaje;
     Solidos* cuadrosSolidos;
     Destruibles* cuadrosDestruibles;
+    QTimer *cronometro= new QTimer(this);
     Bomba* bomba;
+    Explosion* exp;
     Enemigo* enemigo1;
     Enemigo* enemigo2;
-    Enemigo* enemigo3;
     QVector<Solidos*> bSolidos;
     QVector<Destruibles*> bDestruibles;
+    QVector<Bomba*> nBombas;
     QTimer *timer;
     QTimer *timerEnemigo;
     QMediaPlayer *player;

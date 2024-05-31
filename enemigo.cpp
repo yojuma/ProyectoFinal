@@ -1,4 +1,7 @@
 #include "enemigo.h"
+#include <QPainter>
+#include <QGraphicsScene>
+#include "mainwindow.h"
 
 Enemigo::Enemigo(QObject *parent)
     : QObject{parent}
@@ -13,7 +16,6 @@ Enemigo::Enemigo(QObject *parent)
     timer->start(120);
     connect(timer, SIGNAL(timeout()), this, SLOT(actualizarEnemigo()));
 }
-
 
 void Enemigo::actualizarEnemigo(){
     if(direccion){
@@ -37,9 +39,11 @@ void Enemigo::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, Q
     Q_UNUSED(option);
     Q_UNUSED(widget);
 }
+
 qreal Enemigo::getPosX(){
     return posX;
 }
+
 qreal Enemigo::getPosY(){
     return posY;
 }
@@ -60,7 +64,6 @@ void Enemigo::moveRight(){
     }
     posX += 5;
     setPos(posX, posY);
-
 }
 
 void Enemigo::moveLeft(){
@@ -71,29 +74,6 @@ void Enemigo::moveLeft(){
     }
     posX -= 5;
     setPos(posX, posY);
-
-}
-
-void Enemigo::moveUp(){
-    rowPixmap = 180;
-    colPixmap += width;
-    if(colPixmap >= 180){
-        colPixmap = 0;
-    }
-    posY -= 5;
-    setPos(posX, posY);
-
-}
-
-void Enemigo::moveDown(){
-    rowPixmap = 0;
-    colPixmap += width;
-    if(colPixmap >= 180){
-        colPixmap = 0;
-    }
-    posY += 5;
-    setPos(posX, posY);
-
 }
 
 void Enemigo::checkCollision(){

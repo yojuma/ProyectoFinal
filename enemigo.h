@@ -20,8 +20,6 @@ public:
     void setPosY(float newY);
     void moveLeft();
     void moveRight();
-    void moveUp();
-    void moveDown();
     void checkCollision();
     void colision(bool colision);
 
