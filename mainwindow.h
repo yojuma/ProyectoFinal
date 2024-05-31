@@ -39,7 +39,7 @@ public:
     void jugar();
     void crearNivel();
     void activarTimer();
-
+    void actualizarPuntaje();
 
 private slots:
     void on_ButtomPlay_clicked();

@@ -185,7 +185,7 @@ void MainWindow::crearNivel(){
         case 1:{
             //--------fila 1 bloques destruibles--------
             int a = 1+rand() % 10;
-            for(int i=189;i<820;i+=63*a){
+            for(int i=189;i<505;i+=63*a){
                 cuadrosDestruibles = new Destruibles;
                 scene->addItem(cuadrosDestruibles);
                 cuadrosDestruibles->setPos(i,54);
@@ -299,7 +299,7 @@ void MainWindow::crearNivel(){
         case 13:{
             //--------fila 13 bloques destruibles--------
             int g = 1+rand() % 10;
-            for(int i=189;i<820;i+=63*g){
+            for(int i=189;i<505;i+=63*g){
                 cuadrosDestruibles = new Destruibles;
                 scene->addItem(cuadrosDestruibles);
                 cuadrosDestruibles->setPos(i,702);
@@ -500,5 +500,8 @@ void MainWindow::activarTimer(){
     }
 }
 
+void MainWindow::actualizarPuntaje(){
+    puntos_jugador++;
+}
 
 
