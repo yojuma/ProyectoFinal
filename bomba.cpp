@@ -2,6 +2,8 @@
 #include "explosion.h"
 #include <mainwindow.h>
 #include <QGraphicsScene>
+#include <QMessageBox>
+#include <QCoreApplication>
 
 Bomba::Bomba(qreal x, qreal y, QGraphicsItem *parent){
     Q_UNUSED(parent);
@@ -78,7 +80,18 @@ void Bomba::createExplosion(qreal x, qreal y){
             scene()->removeItem(enemigo);
             this->deleteLater();
         }
+        if (Personaje *personaje = dynamic_cast<Personaje*>(item)){
+            scene()->removeItem(personaje);
+            this->deleteLater();
+            QMessageBox msgBox;
+            msgBox.setText("Perdiste!\n"
+                           "Una bomba te ha hecho volar por los aires");
+            msgBox.exec();
+            QCoreApplication::quit();
+        }
+
     }
     auto explosion = new Explosion(x, y);
     scene()->addItem(explosion);
 }
+

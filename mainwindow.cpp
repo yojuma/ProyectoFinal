@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     playlist->addMedia(QUrl("qrc:/audio/musica_menu.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
     player->setPlaylist(playlist);
-    player->setVolume(0);
+    player->setVolume(10);
     player->play();
 }
 
